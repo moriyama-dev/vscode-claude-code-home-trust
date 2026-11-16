@@ -1,0 +1,13 @@
+{
+  "description": "Stop Claude Code from asking whether to trust your home folder every time a window opens.",
+  "capabilities.untrustedWorkspaces": "This extension records folders as trusted for Claude Code, so it stays off in Restricted Mode.",
+  "command.showMenu.title": "Show Menu",
+  "command.toggle.title": "Turn On or Off",
+  "config.title": "Trust Home Folder for Claude Code",
+  "config.enabled": "Record folders as trusted for Claude Code, so its \"Trust this folder in Claude Code?\" dialog does not appear. Off by default: nothing is changed until you turn this on.",
+  "config.scope": "Which folders to record as trusted while the extension is on.",
+  "config.scope.homeFolder.label": "Home folder only",
+  "config.scope.openedFolders.label": "Home folder and every opened folder",
+  "config.scope.homeFolder": "Only your home folder. Claude Code never remembers its answer for this folder, so it asks in every new window.",
+  "config.scope.openedFolders": "Your home folder and every folder opened in a window. **Use with care:** a folder's `.claude/settings.json` and `.mcp.json` can run programs on your computer, and they will be used without asking. A folder inside a Git repository trusts the whole repository."
+}

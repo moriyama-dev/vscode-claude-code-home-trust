@@ -1,0 +1,122 @@
+{
+  "name": "vscode-claude-code-home-trust",
+  "displayName": "Trust Home Folder for Claude Code",
+  "description": "%description%",
+  "version": "0.1.0",
+  "publisher": "moriyama-dev",
+  "license": "MIT",
+  "icon": "images/icon.png",
+  "author": {
+    "name": "Yoshiro Moriyama"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moriyama-dev/vscode-claude-code-home-trust.git"
+  },
+  "homepage": "https://github.com/moriyama-dev/vscode-claude-code-home-trust#readme",
+  "bugs": {
+    "url": "https://github.com/moriyama-dev/vscode-claude-code-home-trust/issues"
+  },
+  "engines": {
+    "vscode": "^1.144.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "claude code",
+    "workspace trust",
+    "trust",
+    "home folder",
+    "status bar"
+  ],
+  "main": "./dist/extension.js",
+  "l10n": "./l10n",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "extensionKind": [
+    "workspace"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false,
+      "description": "%capabilities.untrustedWorkspaces%"
+    },
+    "virtualWorkspaces": false
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "claudeCodeHomeTrust.showMenu",
+        "title": "%command.showMenu.title%",
+        "category": "Claude Code Trust"
+      },
+      {
+        "command": "claudeCodeHomeTrust.toggle",
+        "title": "%command.toggle.title%",
+        "category": "Claude Code Trust"
+      }
+    ],
+    "configuration": {
+      "title": "%config.title%",
+      "properties": {
+        "claudeCodeHomeTrust.enabled": {
+          "type": "boolean",
+          "default": false,
+          "scope": "machine",
+          "order": 0,
+          "markdownDescription": "%config.enabled%"
+        },
+        "claudeCodeHomeTrust.scope": {
+          "type": "string",
+          "enum": [
+            "homeFolder",
+            "openedFolders"
+          ],
+          "enumItemLabels": [
+            "%config.scope.homeFolder.label%",
+            "%config.scope.openedFolders.label%"
+          ],
+          "markdownEnumDescriptions": [
+            "%config.scope.homeFolder%",
+            "%config.scope.openedFolders%"
+          ],
+          "default": "homeFolder",
+          "scope": "machine",
+          "order": 1,
+          "markdownDescription": "%config.scope%"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "node esbuild.mjs --production",
+    "compile": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "build:tests": "node esbuild.mjs --tests",
+    "test:unit": "npm run build:tests && node --test \"out/test/unit/*.test.js\"",
+    "test:integration": "npm run build && npm run build:tests && vscode-test",
+    "test": "npm run test:unit && npm run test:integration",
+    "package": "node -e \"require('fs').mkdirSync('release',{recursive:true})\" && vsce package --no-dependencies --out release/"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/mocha": "10.0.10",
+    "@types/node": "22.20.5",
+    "@types/vscode": "1.144.0",
+    "@vscode/test-cli": "0.0.15",
+    "@vscode/test-electron": "3.1.0",
+    "@vscode/vsce": "4.1.0",
+    "esbuild": "0.28.2",
+    "eslint": "10.14.0",
+    "prettier": "3.9.10",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.72.1"
+  }
+}

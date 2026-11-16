@@ -1,0 +1,13 @@
+{
+  "description": "VS Code のウィンドウを開くたびに Claude Code がホームフォルダーを信頼するか尋ねてくるのを止めます。",
+  "capabilities.untrustedWorkspaces": "この拡張は Claude Code 用にフォルダーを信頼済みとして記録するため、制限モードでは動作しません。",
+  "command.showMenu.title": "メニューを表示",
+  "command.toggle.title": "オン／オフを切り替え",
+  "config.title": "Trust Home Folder for Claude Code",
+  "config.enabled": "フォルダーを Claude Code 用に信頼済みとして記録し、「Trust this folder in Claude Code?」のダイアログが出ないようにします。既定はオフで、オンにするまで何も変更しません。",
+  "config.scope": "オンのときに信頼済みとして記録するフォルダー。",
+  "config.scope.homeFolder.label": "ホームフォルダーだけ",
+  "config.scope.openedFolders.label": "ホームフォルダーと、開いたすべてのフォルダー",
+  "config.scope.homeFolder": "ホームフォルダーだけ。Claude Code はこのフォルダーへの回答を記録しないため、新しいウィンドウのたびに尋ねてきます。",
+  "config.scope.openedFolders": "ホームフォルダーと、ウィンドウで開いたすべてのフォルダー。**注意:** フォルダー内の `.claude/settings.json` や `.mcp.json` はコンピューター上でプログラムを実行でき、それが確認なしで使われます。Git リポジトリ内のフォルダーを信頼すると、リポジトリ全体を信頼したことになります。"
+}
