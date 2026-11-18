@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1 - 2026-11-17
+
+- Support VS Code 1.140 and later, which also makes the extension available for VSCodium on Open VSX.
+
 ## 0.1.0 - 2026-11-16
 
 Initial release.

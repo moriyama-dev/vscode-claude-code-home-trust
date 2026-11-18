@@ -48,7 +48,7 @@ Open **Output › Trust Home Folder for Claude Code** for a log of every check.
 
 ## Requirements
 
-- VS Code 1.144 or later
+- VS Code 1.140 or later. For VSCodium, install it from [Open VSX](https://open-vsx.org/extension/moriyama-dev/vscode-claude-code-home-trust).
 - The Claude Code extension
 
 ## License
