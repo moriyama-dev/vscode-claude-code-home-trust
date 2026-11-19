@@ -1,10 +1,14 @@
 # Trust Home Folder for Claude Code
 
+English | [日本語](README.ja.md)
+
 Stops the **"Trust this folder in Claude Code?"** dialog from coming back every time you open your home folder in VS Code.
 
 Claude Code deliberately does not remember its answer for your home folder, so if you work with `~` open, it asks again in every new window. When you turn this extension on, it records the folder as trusted in Claude Code's own config file, the same record Claude Code writes when you trust any other folder, and the dialog no longer appears.
 
 This extension is not made by or affiliated with Anthropic.
+
+Found a problem or have an idea? [Open an issue on GitHub](https://github.com/moriyama-dev/vscode-claude-code-home-trust/issues).
 
 ## Before you turn it on
 

@@ -1,0 +1,60 @@
+# Trust Home Folder for Claude Code
+
+[English](README.md) | 日本語
+
+VS Code でホームフォルダーを開くたびに出る **「Trust this folder in Claude Code?」** のダイアログを、出ないようにします。
+
+Claude Code は、ホームフォルダーへの回答をわざと記録しません。そのため `~` を開いて作業していると、新しいウィンドウのたびに同じことを聞かれます。この拡張機能をオンにすると、Claude Code 自身の設定ファイルに、そのフォルダーを信頼済みとして記録します。ほかのフォルダーを信頼したときに Claude Code が書く記録と同じもので、以後ダイアログは出なくなります。
+
+この拡張機能は、Anthropic が作ったものではなく、Anthropic とは関係ありません。
+
+不具合や要望があれば、[GitHub の Issues](https://github.com/moriyama-dev/vscode-claude-code-home-trust/issues) でお知らせください。
+
+## オンにする前に
+
+フォルダーを信頼すると、Claude Code はそのフォルダーの `.claude/settings.json` と `.mcp.json` を使えるようになります。これらのファイルは、フック、環境変数、補助コマンド、MCP サーバーとして、コンピューター上でプログラムを実行できます。オンにするのは、対象のフォルダーを自分で作ったか、誰が作ったかを知っている場合だけにしてください。
+
+## 使い方
+
+1. 拡張機能をインストールします。**オンにするまで、何もしません。**
+2. ステータスバーの **Claude Trust: OFF** をクリックして **ON** を選びます。設定の **Trust Home Folder for Claude Code › Enabled** をオンにしても同じです。
+3. ステータスバーの表示が **Claude Trust: ON** になります。マウスを乗せると、どのフォルダーを確認したかが分かります。
+
+同じメニューから、**ON** と **OFF** の切り替え、対象のフォルダーの選択、確認のやり直し、設定を開く操作ができます。
+
+拡張機能は、ウィンドウを開いたとき、設定を変えたとき、ウィンドウにフォルダーを追加したときに、確認し直します。
+
+## 設定
+
+| 設定                          | 既定値       | 内容                                                                                                            |
+| ----------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------- |
+| `claudeCodeHomeTrust.enabled` | `false`      | フォルダーを Claude Code 用に信頼済みとして記録します。                                                         |
+| `claudeCodeHomeTrust.scope`   | `homeFolder` | `homeFolder`: ホームフォルダーだけ。`openedFolders`: ホームフォルダーと、ウィンドウで開いたすべてのフォルダー。 |
+
+どちらの設定も、ユーザー設定（またはリモートの設定）でだけ指定できます。ワークスペースの `.vscode/settings.json` では指定できません。クローンしたフォルダーが、自分自身を信頼させることはできないようにするためです。
+
+`openedFolders` のとき、Git リポジトリの中のフォルダーを開くと、リポジトリ全体を信頼します。Claude Code で **Trust folder** を押したときと同じ動きです。
+
+## 仕組み
+
+- Claude Code の拡張機能に入っている Claude Code の CLI に、フォルダーが信頼済みかどうかを尋ねます（`claude workspace-trust --json`）。Claude Code の拡張機能が、ダイアログを出す前にしている確認と同じものです。
+- 信頼済みでなければ、`~/.claude.json`（または `$CLAUDE_CONFIG_DIR/.claude.json`）の中で、そのフォルダーの `hasTrustDialogAccepted` を `true` にします。CLI が使うのと同じロックを取り、その 1 つの値だけを変えたあと、もう一度 CLI に尋ねて確かめます。
+- 設定ファイルが無いとき、または読み取れないときは、何も書き込みません。記録を消すこともありません。拡張機能をオフにすると、新しい記録は止まりますが、すでにある記録は残ります。Claude Code にもう一度聞いてほしい場合は、CLI を使うかファイルを編集して、記録を削除してください。
+- Claude Code の拡張機能が動く場所で動きます。Remote - SSH、WSL、Dev Containers のリモート側も含みます。ネットワークは使いません。
+
+## 困ったとき
+
+**出力（Output）› Trust Home Folder for Claude Code** を開くと、確認のたびのログが見られます。
+
+- **「このマシンに Claude Code 拡張が見つからない」**（the Claude Code extension was not found on this machine）: この拡張機能が動く場所と同じ場所に、Claude Code をインストールしてください（リモートのウィンドウなら、リモート側です）。
+- **「Claude Code がまだセットアップされていません」**（Claude Code has not been set up yet）: Claude Code を一度起動してから、ステータスバーの項目をクリックして **今すぐ確認し直す**（Check Again Now）を選びます。
+- **「記録できませんでした」**（not recorded）: 理由はログに出ます。たとえば、ほかのプロセスが設定ファイルのロックを持っていた場合です。**今すぐ確認し直す**（Check Again Now）でやり直せます。
+
+## 動作に必要なもの
+
+- VS Code 1.140 以降。VSCodium では [Open VSX](https://open-vsx.org/extension/moriyama-dev/vscode-claude-code-home-trust) からインストールします。
+- Claude Code の拡張機能
+
+## ライセンス
+
+[MIT](LICENSE)
