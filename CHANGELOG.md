@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Show why a folder could not be recorded in the tooltip (the settings file is in use or unreadable, Claude Code did not answer, or Claude Code does not count the record), instead of only "not recorded".
+- Recognize a Claude Code extension older than 2.1.323 from its version number, say that it needs an update, and offer to open its page from the menu.
+- Check again automatically after a few seconds, up to three times, when a folder could not be recorded.
+- Add **Show Log**, **Report an Issue**, **Request a Feature** and **GitHub** to the status bar menu, and the three feedback commands to the Command Palette.
+
 ## 0.1.1 - 2026-11-17
 
 - Support VS Code 1.140 and later, which also makes the extension available for VSCodium on Open VSX.

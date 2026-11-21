@@ -19,6 +19,9 @@ describe('Trust Home Folder for Claude Code', () => {
     const commands = await vscode.commands.getCommands(true);
     assert.ok(commands.includes('claudeCodeHomeTrust.showMenu'));
     assert.ok(commands.includes('claudeCodeHomeTrust.toggle'));
+    assert.ok(commands.includes('claudeCodeHomeTrust.reportIssue'));
+    assert.ok(commands.includes('claudeCodeHomeTrust.requestFeature'));
+    assert.ok(commands.includes('claudeCodeHomeTrust.openRepository'));
   });
 
   it('is off until the user turns it on', () => {

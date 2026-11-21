@@ -56,6 +56,21 @@
         "command": "claudeCodeHomeTrust.toggle",
         "title": "%command.toggle.title%",
         "category": "Claude Code Trust"
+      },
+      {
+        "command": "claudeCodeHomeTrust.reportIssue",
+        "title": "%command.reportIssue.title%",
+        "category": "Claude Code Trust"
+      },
+      {
+        "command": "claudeCodeHomeTrust.requestFeature",
+        "title": "%command.requestFeature.title%",
+        "category": "Claude Code Trust"
+      },
+      {
+        "command": "claudeCodeHomeTrust.openRepository",
+        "title": "%command.openRepository.title%",
+        "category": "Claude Code Trust"
       }
     ],
     "configuration": {

@@ -18,3 +18,10 @@ export function findClaudeBinary(): string | undefined {
   const binary = path.join(extension.extensionPath, 'resources', 'native-binary', name);
   return existsSync(binary) ? binary : undefined;
 }
+
+/** Version of the installed Claude Code extension, which is also the version of the CLI inside it. */
+export function claudeCodeVersion(): string | undefined {
+  const extension = vscode.extensions.getExtension(CLAUDE_CODE_EXTENSION_ID);
+  const version = (extension?.packageJSON as { version?: unknown } | undefined)?.version;
+  return typeof version === 'string' ? version : undefined;
+}

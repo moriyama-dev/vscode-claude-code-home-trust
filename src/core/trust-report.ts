@@ -10,6 +10,57 @@ export interface TrustReport {
   unsafePath: boolean;
 }
 
+/** The first Claude Code release that has `workspace-trust --json`. */
+export const MIN_CLAUDE_CODE_VERSION = '2.1.323';
+
+/**
+ * The CLI is from a Claude Code release that does not have
+ * `workspace-trust --json` yet.
+ */
+export class ClaudeCodeTooOldError extends Error {
+  constructor(detail: string) {
+    super(`This Claude Code does not support "workspace-trust --json"; update the Claude Code extension: ${detail}`);
+    this.name = 'ClaudeCodeTooOldError';
+  }
+}
+
+/** The CLI was still running when the time limit ran out. */
+export class TrustCheckTimeoutError extends Error {
+  constructor(timeoutMs: number) {
+    super(`Claude Code did not answer within ${Math.round(timeoutMs / 1000)} seconds`);
+    this.name = 'TrustCheckTimeoutError';
+  }
+}
+
+/** True when the CLI rejected the command line itself rather than failing while running it. */
+export function isUnsupportedCommand(stderr: string): boolean {
+  return /unknown (option|command)/i.test(stderr);
+}
+
+/**
+ * True when a Claude Code version number is older than the first release with
+ * `workspace-trust --json`. A version that cannot be read is not called old:
+ * the CLI itself then gets to say whether it knows the command.
+ */
+export function isClaudeCodeTooOld(version: string | undefined): boolean {
+  const installed = parseVersion(version);
+  const minimum = parseVersion(MIN_CLAUDE_CODE_VERSION);
+  if (!installed || !minimum) {
+    return false;
+  }
+  for (let index = 0; index < minimum.length; index++) {
+    if (installed[index] !== minimum[index]) {
+      return installed[index] < minimum[index];
+    }
+  }
+  return false;
+}
+
+function parseVersion(version: string | undefined): [number, number, number] | undefined {
+  const match = /^(\d+)\.(\d+)\.(\d+)/.exec(version ?? '');
+  return match ? [Number(match[1]), Number(match[2]), Number(match[3])] : undefined;
+}
+
 /**
  * Asks the Claude Code CLI whether `folder` is trusted. The CLI decides which
  * record counts (the folder itself or its repository root), so the extension
@@ -24,7 +75,15 @@ export function readTrustReport(binaryPath: string, folder: string, timeoutMs = 
       (error, stdout, stderr) => {
         if (error) {
           const detail = stderr.trim();
-          reject(new Error(detail ? `${error.message}: ${detail}` : error.message));
+          if (isUnsupportedCommand(detail)) {
+            reject(new ClaudeCodeTooOldError(detail));
+            return;
+          }
+          if (error.killed) {
+            reject(new TrustCheckTimeoutError(timeoutMs));
+            return;
+          }
+          reject(new Error(detail ? `Claude Code reported an error: ${detail}` : error.message));
           return;
         }
         try {
