@@ -54,7 +54,10 @@ export class TrustStatus implements vscode.Disposable {
             'On, but Claude Code {0} is too old to check folders, so nothing was recorded.',
             escapeMarkdown(view.version),
           ),
-          vscode.l10n.t('Update the Claude Code extension to {0} or later.', MIN_CLAUDE_CODE_VERSION),
+          vscode.l10n.t(
+            'Update the Claude Code extension to {0} or later, then reload the window.',
+            MIN_CLAUDE_CODE_VERSION,
+          ),
           scopeLine(view.scope),
         ]);
         return;

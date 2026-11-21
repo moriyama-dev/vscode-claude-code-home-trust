@@ -32,7 +32,7 @@
   "Checking folders…": "Checking folders…",
   "On, but the Claude Code extension was not found on this machine, so nothing was recorded.": "On, but the Claude Code extension was not found on this machine, so nothing was recorded.",
   "On, but Claude Code {0} is too old to check folders, so nothing was recorded.": "On, but Claude Code {0} is too old to check folders, so nothing was recorded.",
-  "Update the Claude Code extension to {0} or later.": "Update the Claude Code extension to {0} or later.",
+  "Update the Claude Code extension to {0} or later, then reload the window.": "Update the Claude Code extension to {0} or later, then reload the window.",
   "On, but some folders could not be recorded.": "On, but some folders could not be recorded.",
   "On.": "On.",
   "Checked at {0}": "Checked at {0}",

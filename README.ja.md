@@ -62,7 +62,7 @@ Claude Code は、ホームフォルダーへの回答をわざと記録しま�
 
 - **「このマシンに Claude Code 拡張が見つからない」**（the Claude Code extension was not found on this machine）: この拡張機能が動く場所と同じ場所に、Claude Code をインストールしてください（リモートのウィンドウなら、リモート側です）。
 - **「Claude Code がまだセットアップされていません」**（Claude Code has not been set up yet）: Claude Code を一度起動してから、ステータスバーの項目をクリックして **今すぐ確認し直す**（Check Again Now）を選びます。
-- **「Claude Code … は古くてフォルダーを確認できない」**（Claude Code … is too old to check folders）: この拡張機能が使う信頼の確認は、Claude Code 2.1.323 で入りました。ステータスバーの項目をクリックして **Claude Code 拡張を更新する**（Update the Claude Code Extension）を選び、この拡張機能が動く場所と同じ場所で更新してから（リモートのウィンドウならリモート側です。手元のパソコンとは別に更新されます）、**今すぐ確認し直す**（Check Again Now）を選びます。
+- **「Claude Code … は古くてフォルダーを確認できない」**（Claude Code … is too old to check folders）: この拡張機能が使う信頼の確認は、Claude Code 2.1.323 で入りました。ステータスバーの項目をクリックして **Claude Code 拡張を更新する**（Update the Claude Code Extension）を選び、この拡張機能が動く場所と同じ場所で更新してから（リモートのウィンドウならリモート側です。手元のパソコンとは別に更新されます）、ウィンドウを再読み込みします（コマンドパレットの **開発者: ウィンドウの再読み込み**（Developer: Reload Window））。ウィンドウを開いている間に入った更新も、再読み込みするまで反映されません。
 - **「記録できませんでした: 別のプログラムが Claude Code の設定ファイルを使用中です」**: ほかのプログラムが `~/.claude.json` のロックを数秒間持ち続けていました。拡張機能が自動でやり直します。直らないときは、Claude Code を動かしていない状態で `~/.claude.json.lock` というフォルダーが残っていないか見てください。
 - **「記録できませんでした: Claude Code の設定ファイルを読み取れません」**: `~/.claude.json` が Claude Code の書く形の JSON ではないため、何も書き込んでいません。ターミナルで `claude` を実行すると、ファイルのどこがおかしいかが表示されます。
 - **「記録できませんでした: Claude Code から時間内に応答がありませんでした」**: CLI の応答に 20 秒以上かかりました。拡張機能が自動でやり直します。
