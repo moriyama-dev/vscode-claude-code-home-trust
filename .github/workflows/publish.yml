@@ -4,6 +4,8 @@ name: Publish
 # Visual Studio Marketplace through Trusted Publishing and to Open VSX, then
 # attaches the .vsix to a GitHub release. Running the workflow by hand does everything
 # except publishing, so the pipeline can be checked without releasing.
+#
+# The macOS job runs the same tests on a macOS runner first.
 on:
   push:
     tags:
@@ -14,7 +16,13 @@ permissions:
   contents: read
 
 jobs:
+  macos:
+    uses: ./.github/workflows/macos-test.yml
+    permissions:
+      contents: read
+
   release:
+    needs: macos
     runs-on: ubuntu-latest
     permissions:
       # Exchanged for a short-lived Marketplace credential; no stored token is needed.
