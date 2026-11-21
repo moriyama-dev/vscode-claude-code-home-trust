@@ -2,7 +2,7 @@
   "name": "vscode-claude-code-home-trust",
   "displayName": "Trust Home Folder for Claude Code",
   "description": "%description%",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "publisher": "moriyama-dev",
   "license": "MIT",
   "icon": "images/icon.png",
